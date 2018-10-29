@@ -52,6 +52,21 @@ public class CartItemsDaoImpl implements CartItemsDao
 					setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 			return cartitems;
 		}
+		@Override
+		public List<CartItems> getlist(String cart_Id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public List<CartItems> getlistall(String cart_Id, String prodId) {
+			String query="from CartItems where Cart_Id='"+cart_Id+"'";
+			Query w = sessionFactory.getCurrentSession().createQuery(query);
+			List<CartItems>list=(List<CartItems>)w.list();
+			if(list == null||list.isEmpty())	
+			return null;
+			else
+				return list;
+		}
 	
 	
 	

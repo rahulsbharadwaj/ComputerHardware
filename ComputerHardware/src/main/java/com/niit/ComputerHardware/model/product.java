@@ -32,8 +32,8 @@ public class product
 	@Id
 private String prodId;
 private String prodName;
-private String prodPrice;
-private String prodQty;
+private Double prodPrice;
+private int prodQty;
 private String ProdDiscription;
 
 
@@ -75,16 +75,17 @@ public String getProdName() {
 public void setProdName(String prodName) {
 	this.prodName = prodName;
 }
-public String getProdPrice() {
+
+public Double getProdPrice() {
 	return prodPrice;
 }
-public void setProdPrice(String prodPrice) {
+public void setProdPrice(Double prodPrice) {
 	this.prodPrice = prodPrice;
 }
-public String getProdQty() {
+public int getProdQty() {
 	return prodQty;
 }
-public void setProdQty(String prodQty) {
+public void setProdQty(int prodQty) {
 	this.prodQty = prodQty;
 }
 public String getProdDiscription() {

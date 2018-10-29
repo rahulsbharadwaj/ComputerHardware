@@ -11,4 +11,5 @@ public interface BillingDao
 	public boolean delete(Billing billing);
 	public Billing getBilling(String BillingId);
 	public List<Billing> Billinglist();
+	public Billing getUser(String userId);
 }

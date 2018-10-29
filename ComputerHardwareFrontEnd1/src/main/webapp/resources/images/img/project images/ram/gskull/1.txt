@@ -1,0 +1,4 @@
+DDR4 3200 (PC4 25600)
+Timing 16-18-18-38
+CAS Latency 16
+Voltage 1.35V

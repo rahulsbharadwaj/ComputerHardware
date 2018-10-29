@@ -2,10 +2,12 @@ package com.niit.ComputerHardware.model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -27,9 +29,7 @@ public Billing()
 }
 
 
-
-
-@ManyToOne
+@OneToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="userId")
 private user user;
 

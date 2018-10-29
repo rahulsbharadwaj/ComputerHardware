@@ -1,0 +1,5 @@
+Designed for 9th and 8th generation Intel Core processors to maximize connectivity and speed with M.2, USB 3.1 Gen2 and ASUS OptiMem II for better DRAM overclocking stability
+Revamped 5-Way Optimization that has the intelligence to overclock a CPU based on smart prediction and thermal telemetry
+5X Protection III Hardware-level safeguards with SafeSlot Core, LANGuard and Overvoltage Protection provide component longevity and reliability while FanXpert 4 with AIO Pump Header delivers advanced fan control for dynamic system cooling
+Unique SafeSlot Core fortified PCIe slots prevent damage caused by heavyweight GPUs
+Realtek ALC S1220A 8-Channel High Definition Audio CODEC featuring Crystal Sound 3

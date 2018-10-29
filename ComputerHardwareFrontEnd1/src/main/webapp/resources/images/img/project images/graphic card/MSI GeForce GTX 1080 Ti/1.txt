@@ -1,0 +1,10 @@
+11GB 352-Bit GDDR5X
+Core Clock 1506 MHz (OC Mode)
+1493 MHz (Gaming Mode)
+1480 MHz (Silent Mode)
+Boost Clock 1620 MHz (OC Mode)
+1607 MHz (Gaming Mode)
+1582 MHz (Silent Mode)
+1 x DL-DVI-D 2 x HDMI 2.0 2 x DisplayPort 1.4
+3584 CUDA Cores
+PCI Express 3.0 x16

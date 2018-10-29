@@ -1,0 +1,5 @@
+ASUS ROG STRIX B350-F GAMING AM4 AMD B350 SATA 6Gb/s USB 3.1 HDMI ATX AMD Motherboard
+Powered by AMD Ryzen AM4, 7th generation Athlon processors to maximize connectivity and speed with NVMe M.2, USB 3.1, Gigabit LAN, and up to 64GB of DDR4
+5-Way Optimization with Auto-Tuning and Fan Xpert 4 automatically tailors overclocking profiles to your unique build for maximum OC performance and dynamic system cooling. Operating System: Windows 10 64-bit
+AURA Sync RGB lighting plus additional 4-pin RGB headers provides a nearly endless spectrum of colors with the ability to synchronize effects across an ever-expanding ecosystem of AURA Sync enabled products
+Dual Unique SafeSlots feature an injection molding process that integrates metal framing for a stronger, firmly anchored PCIe slot built for heavyweight GPUs

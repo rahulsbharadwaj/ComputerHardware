@@ -1,0 +1,5 @@
+Intel Z370 Chipset - supports Intel Core 8th Generation Processor Family for LGA1151 socket (i3/i5/i7).
+ATX Form Factor. HDMI 1.4, DP 1.2.
+4 Metal Reinforced DDR4 DIMM Dual-Channel 4133MHz+ (up to 64GB). 2 x USB 3.1 (Type-A/Type-C), 10 x USB 3.0, and 2 x USB 2.0.
+6 SATA III 6Gb/s ports, 2 M.2 Key-M 80mm (up to 32Gbps), 1 M.2 Key-E 32mm, Intel Optane Memory Ready.
+Metal Reinforced PCIe x16 slots (x16/8, x8, x4). Supports 2-Way SLI + PhysX. 3 PCIe x1 slots.

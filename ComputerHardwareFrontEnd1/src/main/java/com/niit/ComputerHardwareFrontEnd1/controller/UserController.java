@@ -37,6 +37,7 @@ public class UserController
 	{
 		ModelAndView mv=new ModelAndView();
 		Cart cart= new Cart();
+		cart.setUser(user);
 		user.setCart(cart);
 		if(userDao.saveorupdate(user)==true)
 		{

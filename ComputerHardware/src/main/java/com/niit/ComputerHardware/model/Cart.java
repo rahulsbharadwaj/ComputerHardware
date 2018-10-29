@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -25,9 +27,20 @@ public class Cart
 		this.Cart_Id="Car"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
 	
+	@OneToOne
+	@JoinColumn(name="userId")
+	private user user;
 	
 	
-	
+
+
+	public user getUser() {
+		return user;
+	}
+	public void setUser(user user) {
+		this.user = user;
+	}
+
 	@OneToMany(mappedBy="cart")
 	private List<CartItems> cartitems;
 

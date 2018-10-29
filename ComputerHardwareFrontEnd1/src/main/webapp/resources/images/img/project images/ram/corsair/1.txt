@@ -1,0 +1,4 @@
+DDR4 2400 (PC4 19200)
+Timing 14-16-16-31
+CAS Latency 14
+Voltage 1.2V

@@ -53,4 +53,14 @@ public class ShippingDaoImpl implements ShippingDao
 					setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 			return shipping;
 		}
+		@Override
+		public List<Shipping> getaddbyuser(String userId) {
+			String query="from Shipping where userId='"+userId+"'";
+			Query w = sessionFactory.getCurrentSession().createQuery(query);
+			List<Shipping>list=(List<Shipping>)w.list();
+			if(list == null||list.isEmpty())	
+			return null;
+			else
+				return list;
+		}
 }

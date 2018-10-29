@@ -1,0 +1,3 @@
+20Hz-20KHz
+USB Connector
+Input Impedance: 32 ohms

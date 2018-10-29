@@ -34,6 +34,8 @@ public class userDaoImpl implements userDao
 			bill.setBillingAddress(user.getUserAddress());
 			bill.setBillingPhno(user.getUserPhNo());
 			bill.setBillingName(user.getUserName());
+			user.setBilling(bill);
+			bill.setUser(user);
 			sessionFactory.getCurrentSession().saveOrUpdate(bill);
 			
 			sessionFactory.getCurrentSession().saveOrUpdate(auth);
@@ -79,5 +81,20 @@ public class userDaoImpl implements userDao
 					return list.get(0);
 				}
 			}
+		@Override
+		public user getEmail(String currusername) {
+			String query="from user where email='"+currusername+"'";
+			Query w = sessionFactory.getCurrentSession().createQuery(query);
+			List<user>list=(List<user>)w.list();
+			if(list == null||list.isEmpty())	
+			{
+				return null;
+			}
+			
+				else
+				{
+					return list.get(0);
+				}
+		}
 
 }

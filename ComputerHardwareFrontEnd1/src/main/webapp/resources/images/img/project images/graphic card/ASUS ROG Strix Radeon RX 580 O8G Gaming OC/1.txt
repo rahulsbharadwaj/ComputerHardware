@@ -1,0 +1,6 @@
+8GB 256-Bit GDDR5
+Boost Clock 1380 MHz (OC mode)
+1360 MHz (Gaming mode)
+1 x DVI-D 2 x HDMI 2.0b 2 x DisplayPort 1.4
+2304 Stream Processors
+PCI Express 3.0

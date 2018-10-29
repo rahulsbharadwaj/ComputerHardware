@@ -1,0 +1,4 @@
+ntel B360
+Supports 8th Gen Intel Core, Pentium Gold and Celeron processors for Socket LGA1151
+* Not backward compatible with older generation of LGA 1151 CPUs
+DDR4 2666/ 2400/ 2133

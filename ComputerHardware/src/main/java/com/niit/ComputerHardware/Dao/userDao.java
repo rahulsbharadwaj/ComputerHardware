@@ -13,4 +13,5 @@ public interface userDao
 	public user getuser(String userId);
 	public List<user> userlist();
 	public user isValid(String umail,String pwd);
+	public user getEmail(String currusername);
 }

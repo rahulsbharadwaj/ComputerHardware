@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ include file="header.jsp" %>
 
 
 
@@ -21,10 +21,13 @@
   Password :
   &nbsp;&nbsp;&nbsp;<input type="text" name="username" Placeholder="enter password">
   <br><br><br>
-
-  <input type="submit" value="LOGIN">
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="CANCEL">
+							<input type="submit" value="LOGIN">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="reset" value="CANCEL">
+							
+						</div>
 </form:form> 
 
 </fieldset>
+<%@ include file="footer.jsp" %>
 </html>

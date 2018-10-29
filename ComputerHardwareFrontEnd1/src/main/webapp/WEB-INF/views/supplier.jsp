@@ -1,48 +1,73 @@
 <%@taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ include file="header.jsp" %>
 
 
 <html>
+<head>
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+
+</head>
 <fieldset>
 <legend><B><h1> Supplier Form </h1></B></legend>
 <c:url value="/addsupplier" var="sup"/>
 <form:form action="${sup}" method="post" commandName="supplier">
-  
-   <label> Supplier ID:  </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="text" id="name" name="user_name" placeholder="enter the id" path="SupId"/>
+Supplier ID:  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="text" id="name" name="user_name" placeholder="enter the id" path="supId"/>
 <br>
 <br>
 
-   <label>Supplier Name: </label>
-    &nbsp;<form:input type="TEXT" id="name" name="SUPPLIER NAME" placeholder="enter the name" path="SupName"/>
+   Supplier Name: 
+    &nbsp;<form:input type="text"  name="SUPPLIER NAME" placeholder="enter the name" path="supName"/>
   
 <br>
 <br>  
 
-    <label>Email-ID: </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="Email" id="mail" name="Email-ID" placeholder="enter the email id" path="SupEmailId"/>
+    Email-ID: 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="Email" id="mail" name="Email-ID" placeholder="enter the email id" path="supEmailId"/>
 
 <br>
 <br>  
 
-    <label>Phone No: </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="Number" id="number" name="Number"  placeholder="enter the phone numner" path="SupPhNo"/>
+    Phone No: 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="Number" id="number" name="Number"  placeholder="enter the phone numner" path="supPhNo"/>
 
 <br>
 <br>  
 
-    <label>Address: </label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="msg" name="user_message" placeholder="enter the address" path="SupAddress"></textarea>
+    Address: 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="text" name="user_message" placeholder="enter the address" path="supAddress"/>
   
 <br>
 <br>
-
- 
- 
- <input type="submit" value="Add Supplier">
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Cancel">
+   Password:
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input type="password" name="user_message" placeholder="enter the password" path="supPwd"/>
+   <br>
+<br>
+							<input type="submit" value="ADD Supplier">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="reset" value="CANCEL">
+							
+						
 </form:form> 
    
    
@@ -76,5 +101,5 @@
 </c1:forEach>
 </table>
 
-
+<%@ include file="footer.jsp" %>
 </html>

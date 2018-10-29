@@ -1,0 +1,3 @@
+Intel B360
+8th Generation Intel Core Processors
+* Not backward compatible with older generation of LGA 1151 CPUs

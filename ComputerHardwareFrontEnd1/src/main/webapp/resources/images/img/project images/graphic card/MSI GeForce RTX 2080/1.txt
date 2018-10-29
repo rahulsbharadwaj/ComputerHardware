@@ -1,0 +1,6 @@
+8GB 256-Bit GDDR6
+Core Clock 1515 MHz
+Boost Clock 1860 MHz
+1 x HDMI 2.0b 3 x DisplayPort 1.4
+2944 CUDA Cores
+PCI Express 3.0 x16

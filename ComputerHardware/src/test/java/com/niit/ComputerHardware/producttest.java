@@ -33,8 +33,8 @@ public static void main(String a[])
 	
 	pro.setProdId("123");
 	pro.setProdName("abcd");
-	pro.setProdPrice("100");
-	pro.setProdQty("10");
+	pro.setProdPrice(100.0);
+	pro.setProdQty(10);
 	pro.setProdDiscription("abcdef");
 	
 	cat=catDao.getcategory("123");
@@ -55,8 +55,8 @@ public static void main(String a[])
 	
 	pro.setProdId("124");
 	pro.setProdName("abcde");
-	pro.setProdPrice("120");
-	pro.setProdQty("10");
+	pro.setProdPrice(100.0);
+	pro.setProdQty(10);
 	pro.setProdDiscription("abcdef");
 	cat=catDao.getcategory("123");
 	pro.setCategory(cat);
@@ -74,8 +74,8 @@ public static void main(String a[])
 	
 	pro.setProdId("125");
 	pro.setProdName("abcdef");
-	pro.setProdPrice("100");
-	pro.setProdQty("10");
+	pro.setProdPrice(100.0);
+	pro.setProdQty(10);
 	pro.setProdDiscription("abcdef");
 	cat=catDao.getcategory("123");
 	pro.setCategory(cat);

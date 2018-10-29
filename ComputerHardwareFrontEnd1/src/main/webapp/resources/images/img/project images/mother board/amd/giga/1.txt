@@ -1,0 +1,10 @@
+Supports AMD 1st & 2nd Generation Ryzen / Ryzen with Radeon Vega Graphics Processors
+Dual Channel Non-ECC Unbuffered DDR4, 4 DIMMs
+Intel Ethernet LAN + Dual Band 802.11 ac WI-FI
+Dual PCIe Gen3 M.2 NVMe with Dual Thermal Guards
+ALC1220-VB Enhanced Audio with WIMA Capacitors
+RGB FUSION with Digital LED & RGB LED Headers
+Smart Fan 5 with FAN STOP
+USB 3.1 Gen 2 with USB Type-C & Type-A
+Integrated I/O Shield of Ultra Durable Design
+CEC 2019 Ready

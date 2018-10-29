@@ -1,0 +1,4 @@
+AMD X370
+Supports AMD RYZEN Series Processors and 7th Gen A-series/ Athlon processors for Socket AM4
+DDR4 3200(OC)+/ 2933(OC)/ 2667(OC)/ 2400/ 2133/ 1866
+* 7th Gen A-series / Athlon processors support up to 2400 MHz only.

@@ -1,0 +1,4 @@
+DDR4 3000 (PC4 24000)
+Timing 15-17-17-35
+CAS Latency 15
+Voltage 1.35V

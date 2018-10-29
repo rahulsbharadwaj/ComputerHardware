@@ -1,0 +1,10 @@
+AMD X470
+AM4 socket for AMD Ryzen 2nd Generation / Ryzen with Radeon Vega Graphics / Ryzen 1st Generation / 7th Generation A-Series/Athlon X4 Processors
+* Refer to www.asus.com for the AMD CPU support list.
+AMD Ryzen 2nd Generation Processors
+4 x DIMM, Max. 64GB, DDR4 3600(O.C.)/ 3466(O.C.)/ 3200(O.C.)/ 3000(O.C.)/ 2933(O.C.)/ 2800(O.C.)/ 2666/ 2400/ 2133
+AMD Ryzen with Radeon Vega Graphics / Ryzen 1st Generation Processors
+4 x DIMM, Max. 64GB, DDR4 3200(O.C.)/ 3000(O.C.)/ 2933(O.C.)/ 2800(O.C.)/ 2666/ 2400/ 2133
+AMD 7th Generation A-Series/Athlon X4 Processors
+4 x DIMM, Max. 64GB, DDR4 2400/ 2133
+* Refer to www.asus.com for the Memory QVL (Qualified Vendors Lists).

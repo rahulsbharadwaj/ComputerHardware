@@ -1,0 +1,3 @@
+AMD B450
+Supports AMD RYZEN 1st and 2nd Generation / Ryzen with Radeon Vega Graphics Processors for Socket AM4
+Supports DDR4 3466/ 3200/ 3066/ 3000/ 2933/ 2800/ 2667 (by A-XMP OC MODE), 2667/ 2400/ 2133/ 1866 MHz (by JEDEC)
