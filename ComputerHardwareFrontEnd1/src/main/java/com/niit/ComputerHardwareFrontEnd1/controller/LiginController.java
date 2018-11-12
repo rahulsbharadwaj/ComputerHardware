@@ -38,7 +38,7 @@ public class LiginController
 			model.addAttribute("logout","logout successfully");
 		List<category> categories= categoryDao.catlist();
 		model.addAttribute("lcat", categories);
-		return "login";
+		return "log-in";
 	}
 	@RequestMapping(value="/j_spring_security_check")
 	public String Login(@RequestParam("j_username")String umail,@RequestParam("j_password")String pwd,Model model,HttpSession session)

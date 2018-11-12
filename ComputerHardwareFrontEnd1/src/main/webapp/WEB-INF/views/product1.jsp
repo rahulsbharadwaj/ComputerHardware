@@ -1,15 +1,17 @@
-<%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ include file="header.jsp" %>
+    
+<%@taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c1" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-
-		
-		<!-- BREADCRUMB -->
+<head>
+</head>
+<body>
+<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -19,8 +21,8 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Categories</a></li>
-							<li><a href="#">PC-CABIN</a></li>
-							<li class="active">Cooler Master MasterCase H500P ATX Mid-Tower </li>
+							<li><a href="#">${pro.getCategory().getCategoryname() }</a></li>
+							<li class="active">${pro.getProdName()} </li>
 						</ul>
 					</div>
 				</div>
@@ -36,41 +38,41 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<!-- Product main img -->
+					Product main img
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
+						<div class="product-preview">
+								<img src="${img}/${pro.getProdId()}.jpg" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/2.jpg" alt="">
-							</div>
+<!-- 							<div class="product-preview"> -->
+<%-- 								<img src="${img1}/cabin/cooler h500m/2.jpg" alt=""> --%>
+<!-- 							</div> -->
 
-							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/3.png" alt="">
-							</div>
+<!-- 							<div class="product-preview"> -->
+<%-- 								<img src="${img1}/cabin/cooler h500m/3.png" alt=""> --%>
+<!-- 							</div> -->
 
 							
 							
 						</div>
 					</div>
-					<!-- /Product main img -->
+					/Product main img
 
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
+								<img src="${img}/${pro.getProdId()}.jpg" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/2.jpg" alt="">
-							</div>
+<!-- 							<div class="product-preview"> -->
+<%-- 								<img src="${img1}/cabin/cooler h500m/2.jpg" alt=""> --%>
+<!-- 							</div> -->
 
-							<div class="product-preview">
-								<img src="${img1}/cabin/cooler h500m/3.png" alt="">
-							</div>
+<!-- 							<div class="product-preview"> -->
+<%-- 								<img src="${img1}/cabin/cooler h500m/3.png" alt=""> --%>
+<!-- 							</div> -->
 
 							
 						</div>
@@ -80,17 +82,14 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">Cooler Master MasterCase H500P ATX Mid-Tower </h2>
+							<h2 class="product-name">${pro.getProdName()}</h2>
 							
 							<div>
-								<h3 class="product-price">RS.12800.00<del class="product-old-price">RS.18200.00</del></h3>
+								<h3 class="product-price">RS.${pro.getProdPrice()}<del class="product-old-price">RS.${pro.getProdPrice()}</del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
-							<p><li>Two pre-installed 200mm RGB fans in the front and two optional 200mm fans in the top guarantees high Volume intake of fresh Air</li>
-                                                           <li>A PSU shroud, CPU cut out cover and additional cable covers for clean cable management</li>
-                                                           <li> Two additional PCI Slots at the rear for vertical Graphics card mounting<li>
-                                                            <li>Light grey tinted tempered glass side panel and plastic top/front covers for a clear view inside</li>
-                                                            <li>Support up to 360mm radiators in the top and front and supports up to 412mm GPU</li>
+							<p><li>${pro.getProdDiscription()}</li>
+                                   
                                                          </p>
 
 							
@@ -104,15 +103,16 @@
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+<%-- 								<a href="<c:url value="/addtocart/${pro.getprodId()}"/>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a> --%>
 							</div>
 
 							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+								<li><a href="<c:url value="/addtocart/${pro.getProdId()}"/>"><i class="fa fa-shopping-cart"></i> add to Cart</a></li>
 								
 							</ul>
 
-							
+							</div></div></div>
+						
 
 							<ul class="product-links">
 								<li>Share:</li>
@@ -132,7 +132,7 @@
 							<!-- product tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab2">Details</a></li>
+<!-- 								<li><a data-toggle="tab" href="#tab2">Details</a></li> -->
 							</ul>
 							<!-- /product tab nav -->
 
@@ -142,37 +142,34 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p><li>Two pre-installed 200mm RGB fans in the front and two optional 200mm fans in the top guarantees high Volume intake of fresh Air</li>
-                                                           <li>A PSU shroud, CPU cut out cover and additional cable covers for clean cable management</li>
-                                                           <li> Two additional PCI Slots at the rear for vertical Graphics card mounting<li>
-                                                            <li>Light grey tinted tempered glass side panel and plastic top/front covers for a clear view inside</li>
-                                                            <li>Support up to 360mm radiators in the top and front and supports up to 412mm GPU</li>
+											<p><li>${pro.getProdDiscription()}</li>
+                                                         
                                                                                        </p>
 										</div>
 									</div>
 								</div>
 								<!-- /tab1  -->
 
-								<!-- tab2  -->
-								<div id="tab2" class="tab-pane fade in">
-									<div class="row">
-										<div class="col-md-12">
-											<p>
-<li>Brand				Cooler Master</li>
-<li>Colour				H500P</li>
-<li>Form Factor			Extended ATX</li>
-<li>Item Height			54.1 Centimeters</li>
-<li>Item Width			24.1 Centimeters</li>
-<li>Item Weight	        11.3 Kg</li>
-<li>Product Dimensions	54.4 x 24.1 x 54.1 cm</li>
-<li>Item model number	MCM-H500P-MGNN-S00</li>
-<li>Included            Components	Case and manual</li>
+<!-- 								tab2  -->
+<!-- 								<div id="tab2" class="tab-pane fade in"> -->
+<!-- 									<div class="row"> -->
+<!-- 										<div class="col-md-12"> -->
+<!-- 											<p> -->
+<!-- <li>Brand				Cooler Master</li> -->
+<!-- <li>Colour				H500P</li> -->
+<!-- <li>Form Factor			Extended ATX</li> -->
+<!-- <li>Item Height			54.1 Centimeters</li> -->
+<!-- <li>Item Width			24.1 Centimeters</li> -->
+<!-- <li>Item Weight	        11.3 Kg</li> -->
+<!-- <li>Product Dimensions	54.4 x 24.1 x 54.1 cm</li> -->
+<!-- <li>Item model number	MCM-H500P-MGNN-S00</li> -->
+<!-- <li>Included            Components	Case and manual</li> -->
  	 
-</p>
-										</div>
-									</div>
-								</div>
-								<!-- /tab2  -->
+<!-- </p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/tab2  -->
 
 								<!-- tab3  -->
 
@@ -271,7 +268,7 @@
 						</div>
 					</div>
 					<!-- /product -->
- <!-- product -->
+                   <!-- product -->
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -307,138 +304,43 @@
 		</div>
 		<!-- /Section -->
 
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
+<!-- 		<!-- NEWSLETTER --> -->
+<!-- 		<div id="newsletter" class="section"> -->
+<!-- 			<!-- container --> -->
+<!-- 			<div class="container"> -->
+<!-- 				row -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-12"> -->
+<!-- 						<div class="newsletter"> -->
+<!-- 							<p>Sign Up for the <strong>NEWSLETTER</strong></p> -->
+<%-- 							<form> --%>
+<!-- 								<input class="input" type="email" placeholder="Enter Your Email"> -->
+<!-- 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button> -->
+<%-- 							</form> --%>
+<!-- 							<ul class="newsletter-follow"> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-facebook"></i></a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-twitter"></i></a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-instagram"></i></a> -->
+<!-- 								</li> -->
 								
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
-
-		<!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Contact Us</h3>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>544,26th cross,Rajajinagar,Bangalore</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+91-9686060076</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>gamersrig@google.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">CPU</a></li>
-									<li><a href="#">PC-CABIN</a></li>
-									<li><a href="#">Hard-Disk</a></li>
-									<li><a href="#">GRAPHIC-CARD</a></li>
-									<li><a href="#">Moter-Board</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Information</h3>
-								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /top footer -->
-
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								
-							</ul>
-							
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
-		<!-- /FOOTER -->
-
-		<!-- jQuery Plugins -->
-		<script src="${js}/jquery.min.js"></script>
-		<script src="${js}/bootstrap.min.js"></script>
-		<script src="${js}/slick.min.js"></script>
-		<script src="${js}/nouislider.min.js"></script>
-		<script src="${js}/jquery.zoom.min.js"></script>
-		<script src="${js}/main.js"></script>
-
-	</body>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				/row -->
+<!-- 			</div> -->
+<!-- 			<!-- /container --> -->
+<!-- 		</div> -->
+<!-- 		<!-- /NEWSLETTER --> -->
+		
+		
+		</body>
+		<%@ include file="footer.jsp" %>
+		
+		
 </html>

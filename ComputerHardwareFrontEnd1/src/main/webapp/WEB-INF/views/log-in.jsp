@@ -13,13 +13,13 @@
 <c:url value="/j_spring_security_check" var="login"/>
     <form:form action="${login}" method="post">
 
-  User Name:
-  &nbsp;<input type="text" name="firstname" Placeholder=" enter user name ">
+  User Email:
+  &nbsp;<input type="email" name="j_username" Placeholder=" enter email ">
   
   <br><br>
   
   Password :
-  &nbsp;&nbsp;&nbsp;<input type="text" name="username" Placeholder="enter password">
+  &nbsp;&nbsp;&nbsp;<input type="password" name="j_password" Placeholder="enter password">
   <br><br><br>
 							<input type="submit" value="LOGIN">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

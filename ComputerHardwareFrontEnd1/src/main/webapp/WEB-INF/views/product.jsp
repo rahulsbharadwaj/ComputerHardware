@@ -7,7 +7,11 @@
 
 <html>
 <head>
-<style>
+<c:url value="/resources/images" var="img"/>
+		<c:url value="/resources/images/img/project images" var="img1"/>
+        
+        <c:url value="/resources/css" var="css"/>
+        <c:url value="/resources/js" var="js"/>
 <style>
 table {
     font-family: arial, sans-serif;
@@ -90,6 +94,7 @@ tr:nth-child(even) {
 
 <table>
 <tr>
+<th>Product img</th>
 <th>Product Id</th>
 <th>Product Description</th>
 <th>Product Name</th>
@@ -99,6 +104,7 @@ tr:nth-child(even) {
 </tr>
 <c1:forEach items="${productes}" var="pro">
 <tr>
+<td><img src="${img}/${pro.getProdId()}.jpg" width="250px" height="250px"></td>
 <td>${pro.getProdId()}</td>
 <td>${pro.getProdDiscription()}</td>
 <td>${pro.getProdName()}</td>

@@ -2,6 +2,7 @@ package com.niit.ComputerHardwareFrontEnd1.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.niit.ComputerHardware.model.user;
 import com.niit.ComputerHardware.model.Cart;
 import com.niit.ComputerHardware.model.CartItems;
@@ -97,7 +99,7 @@ public class CartController
 	                    session.setAttribute("items",0);
 	                    model.addAttribute("gtotal",0.0);
 	                    model.addAttribute("msg", "no items is added to cart");
-	                    return "Cart";
+	                    return "cart";
 	                    }
 	                    System.out.println(54354);
 	                    model.addAttribute("cartItem", cartItem);
@@ -106,7 +108,7 @@ public class CartController
 	            session.setAttribute("cartid", cart.getCart_Id());
 	            List<category> categories=categoryDao.catlist();
 	            model.addAttribute("lcat", categories);
-	            return "Cart";
+	            return "cart";
 	                     }
 	                    else
 	                    {

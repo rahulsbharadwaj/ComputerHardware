@@ -56,10 +56,11 @@
 						<li><a href='<c:url value="/log-in"/>'><i class="fa fa-user-o"></i> LOG-IN</a></li>
 						</c1:if>
 						<c1:if test="${pageContext.request.userPrincipal.name!=null}">
-						<li><a href="#"><i class="fa fa-user-o"></i> LOG-OUT</a></li>
+						<li><a href="<c:url value="/j_spring_security_logout"/>"><i class="fa fa-user-o"></i> LOG-OUT</a></li>
 						</c1:if>
+						<c1:if test="${pageContext.request.userPrincipal.name==null }">
 						<li><a href='<c:url value="/user"/>'><i class="fa fa-user-o"></i> SIGN-UP</a></li>
-						
+						</c1:if>
 						
 					</ul>
 				</div>
@@ -97,54 +98,56 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
+<!-- 								Wishlist -->
+<!-- 								<div> -->
+<!-- 									<a href="#"> -->
+<!-- 										<i class="fa fa-heart-o"></i> -->
+<!-- 										<span>Your Wishlist</span> -->
+<!-- 										<div class="qty">2</div> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 								/Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty">${items}</div>
 									</a>
 									<div class="cart-dropdown">
+									<c1:forEach items="${cartItem}" var="cart">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
 													<img src="./img/product01.png" alt="">
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+													<h3 class="product-name"><a href="#">${cart.getProduct().getProdId()}</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>RS${cart.getProdPrice()}</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+<!-- 											<div class="product-widget"> -->
+<!-- 												<div class="product-img"> -->
+<!-- 													<img src="./img/product02.png" alt=""> -->
+<!-- 												</div> -->
+<!-- 												<div class="product-body"> -->
+<!-- 													<h3 class="product-name"><a href="#">product name goes here</a></h3> -->
+<!-- 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4> -->
+<!-- 												</div> -->
+<!-- 												<button class="delete"><i class="fa fa-close"></i></button> -->
+<!-- 											</div> -->
 										</div>
+										</c1:forEach>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small>${items} Item(s) selected</small>
+<!-- 											<h5>SUBTOTAL: $2940.00</h5> -->
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="<c:url value="/checkout"/>">View Cart</a>
+											<a href="<c:url value="/checkout"/>">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -179,11 +182,15 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="<c:url value="/"/>">Home</a></li>
-						
+					
+						<c1:if test="${pageContext.request.userPrincipal.name!=null }">
+     						 <security:authorize access="hasRole('ROLE_ADMIN')">
+       
 						<li><a href='<c:url value="/category"/>'>Categories</a></li>
 						<li><a href='<c:url value="/supplier"/>'>Supplier</a></li>
 						<li><a href='<c:url value="/product"/>'>Product</a></li>
-						
+						</security:authorize>
+						</c1:if>
 						
 					</ul>
 					<!-- /NAV -->
@@ -204,7 +211,7 @@
 					                      <div class="col-md-4 col-xs-6">
 						                  <div class="shop">
 							               <div class="shop-img">
-								          <img src="${img1}/cpu/intel/i5/1.jpg" alt="">
+								          <img src="${img1}/cpu/intel/i5/1.jpg" width="300px" height="300px" alt="">
 							              </div>
 							              <div class="shop-body">
 							              	   <h3>CPU</h3>
@@ -261,11 +268,13 @@
 							<h3 class="title">New Products</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">CPU</a></li>
-									<li><a data-toggle="tab" href="#tab1">PC-CABIN</a></li>
-									<li><a data-toggle="tab" href="#tab1">Hard-Disk</a></li>
-									<li><a data-toggle="tab" href="#tab1">GRAPHIC-CARD</a></li>
-									<li><a data-toggle="tab" href="#tab1">Mother-Board</a></li>
+								<c1:forEach items="${categories}" var="cat">
+									<li class="active"><a data-toggle="tab" href="#tab1">${cat.getCategoryname()}</a></li>
+<!-- 									<li><a data-toggle="tab" href="#tab1">PC-CABIN</a></li> -->
+<!-- 									<li><a data-toggle="tab" href="#tab1">Hard-Disk</a></li> -->
+<!-- 									<li><a data-toggle="tab" href="#tab1">GRAPHIC-CARD</a></li> -->
+<!-- 									<li><a data-toggle="tab" href="#tab1">Mother-Board</a></li> -->
+</c1:forEach>
 								</ul>
 							</div>
 						</div>
@@ -279,19 +288,141 @@
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
+<!-- 										product -->
+<!-- 										<div class="product"> -->
+<!-- 											<div class="product-img"> -->
+<%-- 												<img src="${img1}/cpu/intel/i5/1.jpg" alt=""> --%>
+<!-- 												<div class="product-label"> -->
+													
+<!-- 													<span class="new">NEW</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="product-body"> -->
+<!-- 												<p class="product-category">CPU</p> -->
+<%-- 												<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3> --%>
+<!-- 												<h4 class="product-price">Rs.24500 <del class="product-old-price">Rs.30000</del></h4> -->
+												
+<!-- 												<div class="product-btns"> -->
+<!-- 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button> -->
+													
+<!-- 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="add-to-cart"> -->
+<!-- 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										/product -->
+
+<!-- 										product -->
+<!-- 										<div class="product"> -->
+<!-- 											<div class="product-img"> -->
+<%-- 												<img src="${img1}/cabin/cooler h500m/1.jpg" alt=""> --%>
+<!-- 												<div class="product-label"> -->
+<!-- 													<span class="new">NEW</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="product-body"> -->
+<!-- 												<p class="product-category">PC-CABIN</p> -->
+<%-- 												<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3> --%>
+<!-- 												<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4> -->
+												
+<!-- 												<div class="product-btns"> -->
+<!-- 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button> -->
+													
+<!-- 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="add-to-cart"> -->
+<!-- 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										/product -->
+
+<!-- 										product -->
+<!-- 										<div class="product"> -->
+<!-- 											<div class="product-img"> -->
+<%-- 												<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt=""> --%>
+<!-- 												<div class="product-label"> -->
+<!-- 													<span class="sale">-30%</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="product-body"> -->
+<!-- 												<p class="product-category">Hard-Disk</p> -->
+<%-- 												<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3> --%>
+<!-- 												<h4 class="product-price">RS.3600.00 <del class="product-old-price">Rs.5600</del></h4> -->
+												
+<!-- 												<div class="product-btns"> -->
+<!-- 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button> -->
+													
+<!-- 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="add-to-cart"> -->
+<!-- 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										/product -->
+
+<!-- 										product -->
+<!-- 										<div class="product"> -->
+<!-- 											<div class="product-img"> -->
+<%-- 												<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt=""> --%>
+<!-- 											</div> -->
+<!-- 											<div class="product-body"> -->
+<!-- 												<p class="product-category">GRAPHIC-CARD</p> -->
+<%-- 												<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3> --%>
+<!-- 												<h4 class="product-price">RS.73300.00<del class="product-old-price">Rs.90000</del></h4> -->
+												
+<!-- 												<div class="product-btns"> -->
+<!-- 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button> -->
+													
+<!-- 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="add-to-cart"> -->
+<!-- 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										/product -->
+
+<!-- 										product -->
+<!-- 										<div class="product"> -->
+<!-- 											<div class="product-img"> -->
+<%-- 												<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt=""> --%>
+<!-- 											</div> -->
+<!-- 											<div class="product-body"> -->
+<!-- 												<p class="product-category">Mother Board</p> -->
+<%-- 												<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3> --%>
+<!-- 												<h4 class="product-price">RS.12800.00<del class="product-old-price">RS.18200.00</del></h4> -->
+												
+<!-- 												<div class="product-btns"> -->
+<!-- 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button> -->
+													
+<!-- 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="add-to-cart"> -->
+<!-- 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										/product -->
+
+
+
+<!-- product1 -->
+<c1:forEach items="${products}" var="pro">
 										<div class="product">
 											<div class="product-img">
-												<img src="${img1}/cpu/intel/i5/1.jpg" alt="">
+												<a href="<c:url value="/product1/${pro.getProdId()}"/>"><img src="${img}/${pro.getProdId()}.jpg" wodth="200px" height="200px" alt=""></a>
 												<div class="product-label">
-													
 													<span class="new">NEW</span>
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category">CPU</p>
-												<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3>
-												<h4 class="product-price">Rs.24500 <del class="product-old-price">Rs.30000</del></h4>
+												<p class="product-category">${pro.getCategory().getCategoryname() }</p>
+												<h3 class="product-name"><a href="#">${pro.getProdName()}</a></h3>
+												<h4 class="product-price">RS.${pro.getProdPrice()}<del class="product-old-price">RS.${pro.getProdPrice()}</del></h4>
 												
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
@@ -300,104 +431,20 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<button class="add-to-cart-btn"><a href="<c:url value="/product1/${pro.getProdId()}"/>"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
 											</div>
 										</div>
-										<!-- /product -->
+				</c1:forEach>
+										<!-- /product1 -->
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
-												<div class="product-label">
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">PC-CABIN</p>
-												<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3>
-												<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4>
-												
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Hard-Disk</p>
-												<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3>
-												<h4 class="product-price">RS.3600.00 <del class="product-old-price">Rs.5600</del></h4>
-												
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">GRAPHIC-CARD</p>
-												<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3>
-												<h4 class="product-price">RS.73300.00<del class="product-old-price">Rs.90000</del></h4>
-												
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Mother Board</p>
-												<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3>
-												<h4 class="product-price">RS.12800.00<del class="product-old-price">RS.18200.00</del></h4>
-												
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+
+
+
+
+
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
@@ -433,72 +480,100 @@
 
 						<div class="products-widget-slick" data-nav="#slick-nav-3">
 							<div>
-								<!-- product widget -->
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cpu/intel/i5/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">CPU</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.24500<del class="product-old-price">Rs.30000</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cabin/cooler h500m/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">PC-CABIN</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Hard-Disk</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.3600.00  <del class="product-old-price">Rs.5600</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								product widget -->
+<!-- 							</div> -->
+
+<!-- 							<div> -->
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">GRAPHIC-CARD</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.73300.00 <del class="product-old-price">RS.90000.00</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Moter Board</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+
+
+<!-- product widget -->
+<c1:forEach items="${products}" var="pro">
+
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="${img1}/cpu/intel/i5/1.jpg" alt="">
+										<img src="${img}/${pro.getProdId()}.jpg" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">CPU</p>
-										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3>
-										<h4 class="product-price">Rs.24500<del class="product-old-price">Rs.30000</del></h4>
+										<p class="product-category">${pro.getCategory().getCategoryname() }</p>
+										<h3 class="product-name"><a href="#">${pro.getProdName()}</a></h3>
+										<h4 class="product-price">RS.${pro.getProdPrice()} <del class="product-old-price">RS.${pro.getProdPrice()}</del></h4>
 									</div>
 								</div>
+								</c1:forEach>
 								<!-- /product widget -->
 
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">PC-CABIN</p>
-										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3>
-										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
 
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Hard-Disk</p>
-										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3>
-										<h4 class="product-price">RS.3600.00  <del class="product-old-price">Rs.5600</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
-							</div>
 
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">GRAPHIC-CARD</p>
-										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3>
-										<h4 class="product-price">RS.73300.00 <del class="product-old-price">RS.90000.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
 
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Moter Board</p>
-										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3>
-										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
+
+
+
+
+
+
 
 								
 							</div>
@@ -515,73 +590,97 @@
 
 						<div class="products-widget-slick" data-nav="#slick-nav-4">
 							<div>
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Moter Board</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">GRAPHIC-CARD</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.73300.00<del class="product-old-price">RS.90000.00</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Hard-Disk</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.3600.00 <del class="product-old-price">Rs.5600</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								product widget -->
+<!-- 							</div> -->
+
+<!-- 							<div> -->
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cabin/cooler h500m/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">PC-CABIN</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cpu/intel/i5/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">CPU</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.24500 <del class="product-old-price">Rs.30000</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+								
 								<!-- product widget -->
+                              <c1:forEach items="${products}" var="pro">
+
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt="">
+										<img src="${img}/${pro.getProdId()}.jpg" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Moter Board</p>
-										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3>
-										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4>
+										<p class="product-category">${pro.getCategory().getCategoryname() }</p>
+										<h3 class="product-name"><a href="#">${pro.getProdName()}</a></h3>
+										<h4 class="product-price">RS.${pro.getProdPrice()} <del class="product-old-price">RS.${pro.getProdPrice()}</del></h4>
 									</div>
 								</div>
+								</c1:forEach>
 								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">GRAPHIC-CARD</p>
-										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3>
-										<h4 class="product-price">RS.73300.00<del class="product-old-price">RS.90000.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Hard-Disk</p>
-										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3>
-										<h4 class="product-price">RS.3600.00 <del class="product-old-price">Rs.5600</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">PC-CABIN</p>
-										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3>
-										<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/cpu/intel/i5/1.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">CPU</p>
-										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3>
-										<h4 class="product-price">Rs.24500 <del class="product-old-price">Rs.30000</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
+								
+								
+								
+								
+								
+								
+								
+								
 								
 							</div>
 						</div>
@@ -589,7 +688,7 @@
 
 					<div class="clearfix visible-sm visible-xs"></div>
 
-					<div class="col-md-4 col-xs-6">
+					<div class="col-md-4 col-xs-4">
 						<div class="section-title">
 							<h4 class="title">Top selling</h4>
 							<div class="section-nav">
@@ -599,73 +698,94 @@
 
 						<div class="products-widget-slick" data-nav="#slick-nav-5">
 							<div>
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cpu/intel/i5/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">CPU</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.24500<del class="product-old-price">Rs.30000</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/cabin/cooler h500m/1.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">PC-CABIN</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Hard-Disk</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.3600.00<del class="product-old-price">Rs.5600</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								product widget -->
+<!-- 							</div> -->
+
+<!-- 							<div> -->
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">GRAPHIC-CARD</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3> --%>
+<!-- 										<h4 class="product-price">RS.73000 <del class="product-old-price">RS.90000</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
+<!-- 								product widget -->
+<!-- 								<div class="product-widget"> -->
+<!-- 									<div class="product-img"> -->
+<%-- 										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt=""> --%>
+<!-- 									</div> -->
+<!-- 									<div class="product-body"> -->
+<!-- 										<p class="product-category">Mother Board</p> -->
+<%-- 										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3> --%>
+<!-- 										<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								/product widget -->
+
 								<!-- product widget -->
+<c1:forEach items="${products}" var="pro">
+
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="${img1}/cpu/intel/i5/1.jpg" alt="">
+										<img src="${img}/${pro.getProdId()}.jpg" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">CPU</p>
-										<h3 class="product-name"><a href='<c:url value="/product2"/>'>INTEL CORE I5-8400 BX80684I58400 PROCESSOR</a></h3>
-										<h4 class="product-price">Rs.24500<del class="product-old-price">Rs.30000</del></h4>
+										<p class="product-category">${pro.getCategory().getCategoryname() }</p>
+										<h3 class="product-name"><a href="#">${pro.getProdName()}</a></h3>
+										<h4 class="product-price">RS.${pro.getProdPrice()} <del class="product-old-price">RS.${pro.getProdPrice()}</del></h4>
 									</div>
 								</div>
+								</c1:forEach>
 								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/cabin/cooler h500m/1.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">PC-CABIN</p>
-										<h3 class="product-name"><a href='<c:url value="/product3"/>'>COOLER MASTER MASTERCASE H500P ATX MID-TOWER</a></h3>
-										<h4 class="product-price">Rs.12800 <del class="product-old-price">Rs.18200</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/hard disk/seagate/22-178-993-18.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Hard-Disk</p>
-										<h3 class="product-name"><a href='<c:url value="/product4"/>'>SEAGATE NEW BARRACUDA</a></h3>
-										<h4 class="product-price">RS.3600.00<del class="product-old-price">Rs.5600</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}\graphic card\MSI GeForce GTX 1080 Ti\14-137-114-V01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">GRAPHIC-CARD</p>
-										<h3 class="product-name"><a href='<c:url value="/product5"/>'>MSI GTX 1080 TI GAMING X VIDEO GRAPHIC CARDS</a></h3>
-										<h4 class="product-price">RS.73000 <del class="product-old-price">RS.90000</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="${img1}/mother board/intel/msi/13-144-155-V07.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Mother Board</p>
-										<h3 class="product-name"><a href='<c:url value="/product6"/>'>MSI Pro Series Intel Coffee Lake LGA 1151</a></h3>
-										<h4 class="product-price">Rs.12800<del class="product-old-price">Rs.18200</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
+								
+								
+								
+								
+								
+								
 								
 							</div>
 						</div>
@@ -678,41 +798,41 @@
 		</div>
 		<!-- /SECTION -->
 
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
+<!-- 		<!-- NEWSLETTER --> -->
+<!-- 		<div id="newsletter" class="section"> -->
+<!-- 			<!-- container --> -->
+<!-- 			<div class="container"> -->
+<!-- 				row -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-12"> -->
+<!-- 						<div class="newsletter"> -->
+<!-- 							<p>Sign Up for the <strong>NEWSLETTER</strong></p> -->
+<!-- 							<form> -->
+<!-- 								<input class="input" type="email" placeholder="Enter Your Email"> -->
+<!-- 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button> -->
+<!-- 							</form> -->
+<!-- 							<ul class="newsletter-follow"> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-facebook"></i></a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-twitter"></i></a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-instagram"></i></a> -->
+<!-- 								</li> -->
+<!-- 								<li> -->
+<!-- 									<a href="#"><i class="fa fa-pinterest"></i></a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				/row -->
+<!-- 			</div> -->
+<!-- 			<!-- /container --> -->
+<!-- 		</div> -->
+<!-- 		<!-- /NEWSLETTER --> -->
 
 		<!-- FOOTER -->
 		<footer id="footer">

@@ -57,8 +57,9 @@
 						<c1:if test="${pageContext.request.userPrincipal.name!=null}">
 						<li><a href="#"><i class="fa fa-user-o"></i> LOG-OUT</a></li>
 						</c1:if>
+						<c1:if test="${pageContext.request.userPrincipal.name==null }">
 						<li><a href='<c:url value="/user"/>'><i class="fa fa-user-o"></i> SIGN-UP</a></li>
-						
+						</c1:if>
 						
 					</ul>
 				</div>
@@ -96,50 +97,54 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
+<!-- 								Wishlist -->
+<!-- 								<div> -->
+<!-- 									<a href="#"> -->
+<!-- 										<i class="fa fa-heart-o"></i> -->
+<!-- 										<span>Your Wishlist</span> -->
+<!-- 										<div class="qty">2</div> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 								/Wishlist -->
 
-								<!-- Cart -->
+							<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-										<i class="fa fa-shopping-cart"></i>
+										<i class="fa fa-shopping-cart"></i>								
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty">${items}</div>
 									</a>
+									
 									<div class="cart-dropdown">
+									<c1:forEach items="${cartItem}" var="cart">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="${img}/${pro.getProdId()}.jpg" alt="">
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+													<h3 class="product-name"><a href="#">${cart.getProduct().getProdId()}</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>RS.${cart.getProduct().getProdPrice()}</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
+											
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+<!-- 											<div class="product-widget"> -->
+<!-- 												<div class="product-img"> -->
+<!-- 													<img src="./img/product02.png" alt=""> -->
+<!-- 												</div> -->
+<!-- 												<div class="product-body"> -->
+<!-- 													<h3 class="product-name"><a href="#">product name goes here</a></h3> -->
+<!-- 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4> -->
+<!-- 												</div> -->
+<!-- 												<button class="delete"><i class="fa fa-close"></i></button> -->
+<!-- 											</div> -->
 										</div>
+										</c1:forEach>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small>${items}Item(s) selected</small>
+<!-- 											<h5>SUBTOTAL: $2940.00</h5> -->
 										</div>
 										<div class="cart-btns">
 											<a href="#">View Cart</a>
@@ -179,10 +184,13 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="<c:url value="/"/>">Home</a></li>
 						
+						<c1:if test="${pageContext.request.userPrincipal.name!=null }">
+     						 <security:authorize access="hasRole('ROLE_ADMIN')">
 						<li><a href="<c:url value="/category"/>">Categories</a></li>
 						<li><a href="<c:url value="/supplier"/>">Supplier</a></li>
 						<li><a href="<c:url value="/product"/>">Product</a></li>
-						
+						</security:authorize>
+						</c1:if>
 						
 					</ul>
 					<!-- /NAV -->

@@ -24,16 +24,17 @@
 
   <!-- Links -->
   <ul class="navbar-nav">
+  <c1:if test="${pageContext.request.userPrincipal.name==null }">
     <li class="nav-item-right">
-      <c1:if test="${pageContext.request.userPrincipal.name==null }">
+      
         <a class="nav-link" style="color:white" href='<c:url value="/log-in"/>'>Log-IN</a>
-        </c1:if>    
+           
        
     </li>
     <li class="nav-item-right">
        <a class="nav-link" style="color:white" href='<c:url value="/user"/>'>SignUp</a>
     </li>
-    
+     </c1:if>
     
     <c1:if test="${pageContext.request.userPrincipal.name!=null}">
     <li><a href="<c:url value="/logout"/>"></a></li>

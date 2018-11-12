@@ -30,29 +30,26 @@ public class Order
 	}
 	
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="billId")
 	private Billing billing;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="shipId")
 	private Shipping shipping;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uId")
 	private user user;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Pay_Id")
 	private Pay pay;
 	
 	@OneToMany(mappedBy="order")
 	private List<OrderItems> orderitems;
 	
-	
-	
-	
-	public String getOrder_Id() {
+		public String getOrder_Id() {
 		return Order_Id;
 	}
 	public void setOrder_Id(String order_Id) {

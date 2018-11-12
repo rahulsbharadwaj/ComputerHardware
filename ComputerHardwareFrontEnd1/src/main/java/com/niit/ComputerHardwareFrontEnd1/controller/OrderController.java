@@ -2,6 +2,7 @@ package com.niit.ComputerHardwareFrontEnd1.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,13 +98,14 @@ public class OrderController
 	return "addressorder";
 	} 
 
-	@RequestMapping("/Buy/{p_id}/{ci_id}")
-	public String order(@PathVariable("p_id") String id, Model model,HttpSession session) {
+	@RequestMapping("/Buy/{prodId}/{Cartitem_Id}")
+	public String order(@PathVariable("prodId") String id, @PathVariable("Cartitem_Id")String id2, Model model,HttpSession session) {
 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	if (!(authentication instanceof AnonymousAuthenticationToken)) {
 	String currusername = authentication.getName();
 	user = userDao.getEmail(currusername);
 	cart = user.getCart();
+	cartItems=cartItemsDao.getCartItems(id2);
 	cartItems1=null;
 	product = productDao.getproduct(id);
 	billing = billingDao.getUser(user.getUserId());
@@ -141,7 +143,7 @@ public class OrderController
 	model.addAttribute("prot", product);
 	model.addAttribute("cartItems",cartItems1);
 	model.addAttribute("cart",cart);
-	return "orderconfirm";
+	return "orderconfirmation";
 	}
 
 	@RequestMapping("/previous")
@@ -153,6 +155,17 @@ public class OrderController
 	model.addAttribute("product", product);
 	return "addressorder";
 	}
+	
+	
+	@RequestMapping("/pay")
+	public String pay(Model model) {
+//		List<Card> cards = cardDao.getcardbyuser(user.getU_Id());
+//		model.addAttribute("cards", cards);
+//		model.addAttribute("card", new Card());
+		return "payment";
+	}
+	
+	
 	@RequestMapping("/payment")
 	public String payment(@RequestParam("payb2") String str, Model model) {
 	  System.out.println(1324);
